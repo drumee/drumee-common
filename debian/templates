@@ -1,0 +1,99 @@
+Template: drumee/reinstall
+Type: select
+Choices: reinstall, update, quit
+Default: quit
+Description: There already a Drumee Server installed on you machine
+  reinstall => all existing data and configuration will be lost forever.
+  update    => try to update dependencies.
+  quit      => no action will be taken.
+
+
+Template: drumee/services
+Type: multiselect
+Choices: DNS, Postfix, Jitsi
+Default: DNS, Postfix, Jitsi
+Description: Please Drumee Builtins Services
+ They are used to make your installation run smoothly.
+ If you are not sure, let them all selected
+ If you unselect DNS, you will have to manually configure by your own ACME validation
+ If you unselect Postfix you will have to manually configure by your own the email settings
+ If you unselect Jitsi, you will not be able to use Video conferencing features
+
+Template: drumee/domain
+Type: string
+Default: local
+Description: Please enter the domain name
+ Your Drumee Team Server will use this name as the main URL.
+
+Template: drumee/public_ip4
+Type: string
+Default: 127.0.0.1
+Description: Please enter public IPV4 address
+ This address will be bound to the provided domain name.
+
+Template: drumee/public_ip6
+Type: string
+Default: ff02::1
+Description: Please enter public IPV6 address
+ This address will be bound to the provided domain name.
+
+Template: drumee/admin_email
+Type: string
+Default: 
+Description: The administrator email adsress
+ This email will be used your Drumee Team administrator username. 
+ System related messages will be as well sent to this address. It will not be share to any third party.
+
+Template: drumee/acme_email_account
+Type: string
+Default: 
+Description: Please an email to register in ssl.com for DNS ACME
+ If you are not using ACME, i.e unselected DNS option, just leave this blank.
+ If you use ACME, i.e DNS selected, this option will be defaulted to admin_email.
+ The email will be used to register on zerossl.com ACME server, in order to 
+ generate automatically SSL certificates.
+ If you have select local mode, leave it blank.
+
+
+Template: drumee/db_dir
+Type: string
+Default: /srv/db
+Description: Please enter the Drumee database storage 
+ This storage is dedicated to database usage. 
+ At least 100GB should be allocated, it may be greater if you expect a high number of users
+ DO NOT SHARE WITH ANY OTHER APPLICATION.
+ DO NOT USE system path such as /usr, /bin, /sys, /proc, /tmp, /etc, /lib, /boot, etc.
+
+Template: drumee/data_dir
+Type: string
+Default: /data
+Description: Please enter the Drumee filesystem storage 
+ This storage is dedicated to Drumee Filesystem Management. 
+ It is recommanded dedicated a whole partition to this usage. 
+ The required size depends on your own operating requirements.
+ DO NOT SHARE WITH ANY OTHER APPLICATION.
+ DO NOT USE system path such as /usr, /bin, /sys, /proc, /tmp, /etc, /lib, /boot, etc.
+
+Template: drumee/backup_location
+Type: string
+Default: 
+Description: Please enter the location of your backup location
+ Drumee use rsync to backup data (FMS, DB and configs)
+ If you plan to make a backup on a remote host, ensure
+ ssh keys are properly setup
+
+Template: drumee/description
+Type: string
+Default: My Drumee Team
+Description: Please enter the description of your Drumee Team server
+ This name will be shown on the login page of your server.
+
+Template: drumee/local_mode
+Type: boolean
+Default: true
+Description: Enable local mode?
+  You have selected 'local' as domain name
+  This option shall disable some of Drumee Team Server features, such as
+  SSL, Worldwide access, email capabilies, etc.
+  However this mode is useful for local development 
+
